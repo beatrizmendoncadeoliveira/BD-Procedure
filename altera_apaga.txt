@@ -1,0 +1,39 @@
+select * from CLIENTE;
+select * from ENDERECO;
+
+create or replace procedure remove_cliente_endereco(id_cliente in number)as
+begin
+  declare
+  cli number;
+  begin
+
+
+select c.id_cliente into cli
+from CLIENTE c inner join ENDERECO e on c.id_cliente = e.id_endereco;
+
+delete from ENDERECO
+where id_cliente=cli ;
+
+delete from CLIENTE
+where id_cliente=cli;
+
+end;
+
+end;
+
+exec remove_cliente_endereco(1);
+
+
+
+
+create or replace procedure atualiza_endereco(id_cliente in number)as
+begin
+declare
+en varchar(200)
+select * into en 
+from CLIENTE c 
+inner join ENDERECO e on c.id_cliente = e.id_cliente;
+update ENDERECO set tipo_logradouro = '2', logradouro ='2' where id_cliente = id_cliente;
+
+end;
+end atualiza_endereco;
