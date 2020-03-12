@@ -24,16 +24,18 @@ end;
 exec remove_cliente_endereco(1);
 
 
-
-
-create or replace procedure atualiza_endereco(id_cliente in number)as
+create or replace procedure atualiza_endereco(id_cliente_e in number)as
 begin
-declare
-en varchar(200)
-select * into en 
-from CLIENTE c 
-inner join ENDERECO e on c.id_cliente = e.id_cliente;
-update ENDERECO set tipo_logradouro = '2', logradouro ='2' where id_cliente = id_cliente;
-
+    declare
+        v_id_endereco endereco.id_endereco%type;
+        begin
+        
+            select e.id_endereco into v_id_endereco from CLIENTE c 
+            inner join ENDERECO e on c.id_cliente = e.id_cliente;
+            
+            update ENDERECO set tipo_logradouro = '2', logradouro ='2' where id_endereco = v_id_endereco;
+        
+        end;
 end;
-end atualiza_endereco;
+
+exec atualiza_endereco(2);
